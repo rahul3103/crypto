@@ -10,9 +10,9 @@ def data_collector():
             if coin['MarketName'] in coins:
                 coin_data[coin['MarketName'].split('-')[0]] = {}
                 coin_data[coin['MarketName'].split('-')[0]]['coindelta'] = {
-                    'ask': coin['Ask'],
-                    'bid': coin['Bid'],
-                    'last': coin['Last']
+                    'ask': float(coin['Ask']),
+                    'bid': float(coin['Bid']),
+                    'last': float(coin['Last'])
                 }
 
     koinex = requests.get(koinex_api)
@@ -24,5 +24,8 @@ def data_collector():
                 'bid': float(koinex.json()['stats'][coin]['highest_bid']),
                 'last': float(koinex.json()['stats'][coin]['last_traded_price'])
             }
+
+    for coin in ['xrp', 'eth', 'ltc', 'btc', 'bch']:
+        coin_data[coin]['diff'] = round(coin_data[coin]['koinex']['bid']-coin_data[coin]['coindelta']['ask'], 2)
 
     return coin_data
