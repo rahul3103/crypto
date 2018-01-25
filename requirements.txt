@@ -1,0 +1,9 @@
+flask
+peewee
+psycopg2
+uwsgi
+flask_cors
+lxml
+beautifulsoup4
+redis
+huey
