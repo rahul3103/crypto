@@ -14,8 +14,8 @@
       <colgroup span="2"></colgroup>
       <colgroup span="2"></colgroup>
       <tr>
-        <th rowspan="2">Coins</th>
-        <th colspan="2" scope="colgroup">Last Price</th>
+        <th rowspan="2"><img class="logo" src="{{ url_for('static',filename='images/coin.png') }}" alt=""></th>
+        <th colspan="3" scope="colgroup">Last Price</th>
         <th colspan="2" scope="colgroup">Best Bid</th>
         <th colspan="2" scope="colgroup">Best Ask</th>
         <th colspan="1" scope="colgroup">Profit/Loss</th>
@@ -23,6 +23,7 @@
       <tr>
         <th scope="col">Coindelta</th>
         <th scope="col">Koinex</th>
+        <th scope="col">Coinmarketcap</th>
         <th scope="col">Coindelta</th>
         <th scope="col">Koinex</th>
         <th scope="col">Coindelta</th>
@@ -32,9 +33,10 @@
       {% set coins = ['xrp', 'eth', 'ltc', 'btc', 'bch', 'omg', 'qtum'] %}
       {% for coin in coins %}
         <tr>
-          <th class="coin" scope="row"><span><img src="{{ url_for('static',filename='images/' + coin + '.svg') }}" alt="">{{ coin }}</span></th>
+          <th class="coin-name" scope="row"><span><img class="coin-logo" src="{{ url_for('static',filename='images/' + coin + '.svg') }}" alt="">{{ coin }}</span></th>
           <td>{{ data[coin]['coindelta']['last'] }}</td>
           <td>{% if data[coin]['koinex'] %} {{ data[coin]['koinex']['last'] }} {% endif %}</td>
+          <td>{{ data[coin]['coinmarketcap']['last'] }}</td>
           <td>{{ data[coin]['coindelta']['bid'] }}</td>
           <td>{% if data[coin]['koinex'] %} {{ data[coin]['koinex']['bid'] }} {% endif %}</td>
           <td>{{ data[coin]['coindelta']['ask'] }}</td>

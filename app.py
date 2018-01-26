@@ -1,5 +1,6 @@
 import json
-from flask import Flask, jsonify, request, render_template
+import os
+from flask import Flask, jsonify, request, render_template, send_from_directory
 # from playhouse.shortcuts import model_to_dict
 from flask_cors import CORS
 # from model import Crypto
@@ -30,6 +31,11 @@ CORS(app)
 def index():
     data = data_collector()
     return render_template('index.html', data=data)
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'),
+                               'images/favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 if __name__ == '__main__':
     app.run()

@@ -1,5 +1,5 @@
 import requests
-from settings import coindelta_api, koinex_api
+from settings import coindelta_api, koinex_api, coinmarketcap_api
 
 def data_collector():
     coin_data = {}
@@ -24,6 +24,16 @@ def data_collector():
                 'bid': float(koinex.json()['stats'][coin]['highest_bid']),
                 'last': float(koinex.json()['stats'][coin]['last_traded_price'])
             }
+
+    coinmarketcap = requests.get(coinmarketcap_api)
+    if coinmarketcap.status_code == 200:
+        coins = ['BTC', 'ETH', 'LTC', 'XRP', 'BCH', 'QTUM', 'OMG']
+        for coin in coins:
+            for crypto in coinmarketcap.json():
+                if crypto['symbol'] == coin:
+                    coin_data[coin.lower()]['coinmarketcap'] = {
+                        'last': round(float(crypto['price_inr']), 2)
+                    }
 
     for coin in ['xrp', 'eth', 'ltc', 'btc', 'bch']:
         coin_data[coin]['diff'] = round(coin_data[coin]['koinex']['bid']-coin_data[coin]['coindelta']['ask'], 2)
