@@ -32,7 +32,7 @@
       {% set coins = ['xrp', 'eth', 'ltc', 'btc', 'bch', 'omg', 'qtum'] %}
       {% for coin in coins %}
         <tr>
-          <th class="coin" scope="row">{{ coin }}</th>
+          <th class="coin" scope="row"><span><img src="{{ url_for('static',filename='images/' + coin + '.svg') }}" alt="">{{ coin }}</span></th>
           <td>{{ data[coin]['coindelta']['last'] }}</td>
           <td>{% if data[coin]['koinex'] %} {{ data[coin]['koinex']['last'] }} {% endif %}</td>
           <td>{{ data[coin]['coindelta']['bid'] }}</td>
