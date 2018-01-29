@@ -18,7 +18,8 @@
         <th colspan="3" scope="colgroup">Last Price</th>
         <th colspan="2" scope="colgroup">Best Bid</th>
         <th colspan="2" scope="colgroup">Best Ask</th>
-        <th colspan="1" scope="colgroup">Profit/Loss</th>
+        <th colspan="2" scope="colgroup">P/L via CD</th>
+        <th colspan="2" scope="colgroup">P/L via KO</th>
       </tr>
       <tr>
         <th scope="col">Coindelta</th>
@@ -28,7 +29,10 @@
         <th scope="col">Koinex</th>
         <th scope="col">Coindelta</th>
         <th scope="col">Koinex</th>
-        <th scope="col">KO-CD</th>
+        <th scope="col">P/L</th>
+        <th scope="col">%</th>
+        <th scope="col">P/L</th>
+        <th scope="col">%</th>
       </tr>
       {% set coins = ['xrp', 'eth', 'ltc', 'btc', 'bch', 'omg', 'qtum'] %}
       {% for coin in coins %}
@@ -41,7 +45,10 @@
           <td>{% if data[coin]['koinex'] %} {{ data[coin]['koinex']['bid'] }} {% endif %}</td>
           <td>{{ data[coin]['coindelta']['ask'] }}</td>
           <td>{% if data[coin]['koinex'] %} {{ data[coin]['koinex']['ask'] }} {% endif %}</td>
-          <td>{{ data[coin]['diff'] }}</td>
+          <td>{{ data[coin]['diffco'] }}</td>
+          <td>{{ data[coin]['percco'] }}</td>
+          <td>{{ data[coin]['diffko'] }}</td>
+          <td>{{ data[coin]['percko'] }}</td>
         </tr>
       {% endfor %}
     </table>

@@ -36,6 +36,10 @@ def data_collector():
                     }
 
     for coin in ['xrp', 'eth', 'ltc', 'btc', 'bch']:
-        coin_data[coin]['diff'] = round(coin_data[coin]['koinex']['bid']-coin_data[coin]['coindelta']['ask'], 2)
+        coin_data[coin]['diffco'] = round(coin_data[coin]['koinex']['bid']-coin_data[coin]['coindelta']['ask'], 2)
+        coin_data[coin]['percco'] = round(((100/coin_data[coin]['coindelta']['ask'])*coin_data[coin]['koinex']['bid'])-100, 4)
+        coin_data[coin]['diffko'] = round(coin_data[coin]['coindelta']['bid']-coin_data[coin]['koinex']['ask'], 2)
+        coin_data[coin]['percko'] = round(((100/coin_data[coin]['koinex']['ask'])*coin_data[coin]['coindelta']['bid'])-100, 4)
+
 
     return coin_data
