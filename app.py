@@ -30,7 +30,8 @@ CORS(app)
 @app.route('/')
 def index():
     data = data_collector()
-    return render_template('index.html', data=data)
+    print(data['top'])
+    return render_template('index.html', data=data['coin_data'], top=data['top'])
 
 @app.route('/favicon.ico')
 def favicon():
@@ -38,4 +39,4 @@ def favicon():
                                'images/favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)

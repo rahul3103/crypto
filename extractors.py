@@ -34,12 +34,18 @@ def data_collector():
                     coin_data[coin.lower()]['coinmarketcap'] = {
                         'last': round(float(crypto['price_inr']), 2)
                     }
+    top = {'cd': {'coin': '', 'value': 0}, 'ko': {'coin': '', 'value': -100}}
 
     for coin in ['xrp', 'eth', 'ltc', 'btc', 'bch']:
         coin_data[coin]['diffco'] = round(coin_data[coin]['koinex']['bid']-coin_data[coin]['coindelta']['ask'], 2)
         coin_data[coin]['percco'] = round(((100/coin_data[coin]['coindelta']['ask'])*coin_data[coin]['koinex']['bid'])-100, 4)
         coin_data[coin]['diffko'] = round(coin_data[coin]['coindelta']['bid']-coin_data[coin]['koinex']['ask'], 2)
         coin_data[coin]['percko'] = round(((100/coin_data[coin]['koinex']['ask'])*coin_data[coin]['coindelta']['bid'])-100, 4)
+        if top['cd']['value'] < coin_data[coin]['percco']:
+            top['cd']['coin'] = coin
+            top['cd']['value'] = coin_data[coin]['percco']
+        if top['ko']['value'] < coin_data[coin]['percko']:
+            top['ko']['coin'] = coin
+            top['ko']['value'] = coin_data[coin]['percko']
 
-
-    return coin_data
+    return {'coin_data': coin_data, 'top': top}

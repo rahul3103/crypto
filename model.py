@@ -27,7 +27,6 @@ class BaseModel(Model):
 
 
 class Crypto(BaseModel):
-    exchange = CharField()
     coin = CharField()
     trade_values = BinaryJSONField(default={})
     cdate = DateTimeField(default=datetime.datetime.now)
